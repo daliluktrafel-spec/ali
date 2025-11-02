@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وفاء سيئون للسفريات</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    color: #fff;
+    direction: rtl;
+}
+
+/* Splash Screen */
+#splash {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    background: url('https://yemenia.com/uploads/global/3I6A9342_2022-09-19-160946_snib.JPG') no-repeat center center;
+    background-size: cover;
+}
+#splash::before {
+    content
+    width: 250px;
+    margin-bottom: 15px;
+    z-index: 1;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: logoAppear 1s forwards;
+}
+
+/* نصوص شاشة البداية */
+#splash h1 {
+    color: gold;
+    font-size: 3em;
+    margin: 15px 0;
+    text-shadow: 2px 2px 10px #000;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: textAppear 1s forwards;
+    animation-delay: 0.5s;
+}
+
+#splash h2 {
+    color: gold;
+    font-size: 1.8em;
+    margin: 5px 0;
+    text-shadow: 1px 1px 5px #000;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: textAppear2 1s forwards;
+    animation-delay: 1s;
+}
+
+#nextBtn {
+    padding: 1em 3em;
+    font-size: 1.2em;
+    background-color: gold;
+    color: #0d1b2a;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+#nextBtn:hover {
+    background-color: #ffd700cc;
+}
+
+/* Main Screen */
+#mainScreen {
+    display: none;
+    padding: 30px;
+    text-align: center;
+}
+#mainScreen h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: gold;
+    text-shadow: 1px 1px 5px #000;
+}
+
+/* Cards */
+.grid-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.card {
+    background: linear-gradient(135deg, #1b263b, #415a77);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+    width: 250px;
+    text-align: center;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 25px rgba(0,0,0,0.5);
+}
+.card h2 {
+    margin-top: 0;
+    color: gold;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInOverlay 0.5s ease-in-out;
+}
+.overlay-content {
+    background: linear-gradient(135deg, #1b263b, #415a77);
+    padding: 30px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    text-align: right;
+    line-height: 1.6;
+    color: #fff;
+    box-shadow: 0 0 25px #000;
+    animation: slideUp 0.5s ease-in-out;
+}
+.overlay-content h2 {
+    text-align: center;
+    color: gold;
+    margin-bottom: 15px;
+}
+.overlay-content button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    background-color: gold;
+    color: #0d1b2a;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.overlay-content button:hover {
+    background-color: #ffd700cc;
+}
+
+/* Animations */
+@keyframes fadeInOverlay {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes slideUp {
+    from {transform: translateY(30px); opacity:0;}
+    to {transform: translateY(0); opacity:1;}
+}
+@keyframes logoAppear {
+    to {opacity: 1; transform: translateY(0);}
+}
+@keyframes textAppear {
+    to {opacity: 1; transform: translateY(0);}
+}
+@keyframes textAppear2 {
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<!-- Splash Screen -->
+<div id="splash">
+    
+    <
+    
+    <h1>مكتب وفاء سيئون</h1>
+    <h2>دليلك في السفر</h2>
+
+    <button id="nextBtn">التالي</button>
+</div>
+
+<!-- Main Screen -->
+<div id="mainScreen">
+    <h1>اختر خدمتك</h1>
+    <div class="grid-container">
+        <div class="card" data-target="flightOverlay">
+            <h2>تذاكر السفر ✈️</h2>
+        </div>
+        <div class="card" data-target="hajjOverlay">
+            <h2>حج وعمرة 🕋</h2>
+        </div>
+        <div class="card" data-target="visaOverlay">
+            <h2>تأشيرات مختلفة 🛂</h2>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay: Flight -->
+<div id="flightOverlay" class="overlay">
+    <div class="overlay-content">
+        <h2>تذاكر السفر ✈️</h2>
+        <p>مع <strong>وفاء سيئون</strong>، السفر أصبح أسرع وأسهل! احجز واستمتع بكل لحظة من رحلتك، سواء كانت سياحية، ترفيهية، أو للعلاج. 🌍</p>
+        <p>حجز رحلتك أصبح أسهل مع <strong>وفاء سيئون</strong>! ✈️ سافر مع أفضل شركات الطيران في اليمن: اليمنية، بلقيس، عدن فلاي، وتمتع بالراحة، الأمان، وأفضل الأسعار.</p>
+        <ul>
+            <li>سيئون – القاهرة: يوميًا ما عدا السبت</li>
+            <li>سيئون – جدة / جدة – سيئون: الجمعة</li>
+            <li>عدن – جدة: يوميًا</li>
+            <li>عدن – دبي / دبي – عدن: جمعة، اثنين، أربعاء</li>
+            <li>عدن – عمان / عمان – عدن: أحد وأربعاء</li>
+            <li>الريان – جدة: السبت فقط</li>
+        </ul>
+        <p>احجز الآن وتمتع برحلة مريحة وآمنة مع أفضل شركات الطيران! ✨</p>
+        <button class="closeOverlay">اغلاق</button>
+    </div>
+</div>
+
+<!-- Overlay: Hajj & Umrah with Icons -->
+<div id="hajjOverlay" class="overlay">
+    <div class="overlay-content">
+        <h2>حج وعمرة 🕋</h2>
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap: wrap; margin-bottom:20px;">
+            <button class="subServiceBtn" data-target="hajjContent" style="padding:10px 20px; background:gold; color:#0d1b2a; border:none; border-radius:10px; cursor:pointer; font-weight:600;">الحج</button>
+            <button class="subServiceBtn" data-target="umrahContent" style="padding:10px 20px; background:gold; color:#0d1b2a; border:none; border-radius:10px; cursor:pointer; font-weight:600;">العمرة</button>
+        </div>
+
+        <!-- الحج -->
+        <div id="hajjContent" style="display:none; text-align:right;">
+            <p><strong>حجّ مبرور وسعي مشكور</strong> مع <strong>وفاء سيئون للسفريات والسياحة</strong></p>
+            <p>يسرّ <strong>وفاء سيئون للسفريات والسياحة</strong> أن تقدم لكم خدماتها المميزة للحج لهذا الموسم، لتكون رحلتكم إلى بيت الله الحرام مريحة، آمنة، وميسرة.</p>
+            <ul>
+                <li>🎫 حج شامل: تذاكر السفر، الإقامة، والنقل بين المشاعر.</li>
+            </ul>
+            <h3>المتطلبات الأساسية للحج:</h3>
+            <ol>
+                <li>🛂 <strong>جواز السفر:</strong>
+                    <ul>
+                        <li>صالح لمدة لا تقل عن 6 أشهر من تاريخ السفر.</li>
+                        <li>نسخة من الجواز مطلوبة عند التسجيل.</li>
+                    </ul>
+                </li>
+                <li>🛃 <strong>التأشيرة:</strong>
+                    <ul>
+                        <li>الحصول على تأشيرة حج صادرة من السفارة السعودية أو عبر مكتب حج معتمد.</li>
+                    </ul>
+                </li>
+                <li>💉 <strong>التطعيمات الصحية:</strong>
+                    <ul>
+                        <li>لقاح كورونا حسب التعليمات السعودية.</li>
+                        <li>لقاح الحمى الشوكية (Meningococcal ACWY) إلزامي لكل الحجاج.</li>
+                    </ul>
+                </li>
+                <li>📄 <strong>التسجيل لدى مكتب حج معتمد:</strong>
+                    <ul>
+                        <li>التسجيل عبر <strong>وفاء سيئون للسفريات والسياحة</strong> لاستكمال الإجراءات الرسمية.</li>
+                        <li>دفع الرسوم المطلوبة وتسليم المستندات.</li>
+                    </ul>
+                </li>
+                <li>🩺 <strong>الفحوص الطبية:</strong>
+                    <ul>
+                        <li>إجراء كشف طبي عام حسب متطلبات المكتب لضمان القدرة على أداء المناسك.</li>
+                    </ul>
+                </li>
+                <li>👕 <strong>الملابس والمستلزمات:</strong>
+                    <ul>
+                        <li>ملابس الإحرام للرجال والنساء.</li>
+                        <li>حقيبة صغيرة للمستلزمات الشخصية، ماء، وأدوية ضرورية.</li>
+                    </ul>
+                </li>
+                <li>📌 <strong>الالتزام بالإرشادات:</strong>
+                    <ul>
+                        <li>الالتزام بالتعليمات الصحية والأمنية داخل المشاعر.</li>
+                        <li>الالتزام بمواعيد الرحلات وحافلات النقل المنظمة من قبل المكتب.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <!-- العمرة -->
+        <div id="umrahContent" style="display:none; text-align:right;">
+            <p><strong>عمرة ميسرة وسهلة 🕋</strong> مع <strong>وفاء سيئون للسفريات والسياحة</strong></p>
+            <p>يسرّ <strong>مكتب وفاء سيئون للسفريات والسياحة</strong> أن يقدم لكم خدمات تأشيرات العمرة لتنطلق رحلتكم الروحانية إلى بيت الله الحرام بكل راحة وسهولة.</p>
+            <h3>متطلبات تأشيرة العمرة:</h3>
+            <ol>
+                <li>🛂 <strong>جواز السفر:</strong>
+                    <ul>
+                        <li>صالح لمدة لا تقل عن 6 أشهر من تاريخ السفر.</li>
+                        <li>نسخة من الجواز مطلوبة عند تقديم الطلب.</li>
+                    </ul>
+                </li>
+                <li>📸 <strong>الصور الشخصية:</strong>
+                    <ul>
+                        <li>عدد 2 صورة حديثة بحجم صور جواز السفر، خلفية بيضاء.</li>
+                    </ul>
+                </li>
+                <li>💉 <strong>التطعيمات:</strong>
+                    <ul>
+                        <li>لقاح كورونا حسب التعليمات السعودية.</li>
+                        <li>لقاح الحمى الشوكية (Meningococcal ACWY) للحجاج القادمين من اليمن.</li>
+                    </ul>
+                </li>
+                <li>📝 <strong>حجز العمرة:</strong>
+                    <ul>
+                        <li>التسجيل عبر مكتب <strong>وفاء سيئون للسفريات والسياحة</strong> لاستكمال جميع الإجراءات.</li>
+                        <li>دفع الرسوم المطلوبة للحصول على التأشيرة والخدمات المرافقة.</li>
+                    </ul>
+                </li>
+                <li>🩺 <strong>الفحوص الطبية:</strong>
+                    <ul>
+                        <li>بعض الحالات قد تتطلب تقديم كشف طبي عام حسب متطلبات المكتب.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <button class="closeOverlay">اغلاق</button>
+    </div>
+</div>
+
+<!-- Overlay: Visa -->
+<div id="visaOverlay" class="overlay">
+    <div class="overlay-content">
+        <h2>تأشيرات مختلفة 🛂</h2>
+        <p>المحتوى سيضاف لاحقًا.</p>
+        <button class="closeOverlay">اغلاق</button>
+    </div>
+</div>
+
+<script>
+const nextBtn = document.getElementById('nextBtn');
+const splash = document.getElementById('splash');
+const mainScreen = document.getElementById('mainScreen');
+
+nextBtn.addEventListener('click', () => {
+    splash.style.display = 'none';
+    mainScreen.style.display = 'block';
+});
+
+// Cards click to show overlay
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        const targetId = card.getAttribute('data-target');
+        document.getElementById(targetId).style.display = 'flex';
+        document.querySelector('.grid-container').style.display = 'none';
+    });
+});
+
+// Close overlay
+const closeButtons = document.querySelectorAll('.closeOverlay');
+closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.parentElement.parentElement.style.display = 'none';
+        document.querySelector('.grid-container').style.display = 'flex';
+    });
+});
+
+// عرض الحج أو العمرة عند الضغط
+const subServiceBtns = document.querySelectorAll('.subServiceBtn');
+subServiceBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById('hajjContent').style.display = 'none';
+        document.getElementById('umrahContent').style.display = 'none';
+        document.getElementById(targetId).style.display = 'block';
+    });
+});
+</script>
+
+</body>
+</html>
